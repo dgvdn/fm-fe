@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const FresherManagement = () => {
     const [freshers, setFreshers] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -30,9 +32,20 @@ const FresherManagement = () => {
 
         fetchData();
     }, []);
+
+    const handleAddFresher = () => {
+        navigate('/add-fresher');
+    };
+
     return (
         <div className="p-4">
             <h1 className="text-2xl font-bold mb-4">Fresher Management</h1>
+            <button
+                className="bg-blue-500 text-white p-2 rounded-md mb-4"
+                onClick={handleAddFresher}
+            >
+                Add Fresher
+            </button>
             <div className="overflow-x-auto">
                 <table className="min-w-full bg-white">
                     <thead className="bg-gray-800 text-white">

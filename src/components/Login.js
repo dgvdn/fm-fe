@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { isTokenExpired } from "../utils/authUtils";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -8,10 +9,11 @@ const Login = () => {
 
   useEffect(() => {
     const accessToken = localStorage.getItem("accessToken");
-    if (accessToken) {
+    if (accessToken && !isTokenExpired(accessToken)) {
       navigate("/dashboard");
     }
   }, [navigate]);
+  
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
