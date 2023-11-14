@@ -5,6 +5,9 @@ const FresherManagement = () => {
     const [freshers, setFreshers] = useState([]);
     const [searchTerm, setSearchTerm] = useState(''); // Search term state
     const [filteredLanguage, setFilteredLanguage] = useState(''); // Filtered language state
+    const [searchEmail, setSearchEmail] = useState(''); // Search email state
+    const [center, setCenter] = useState([]);
+    const [filteredCenter, setFilteredCenter] = useState(''); // Filtered center state
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -35,6 +38,25 @@ const FresherManagement = () => {
         fetchData();
     }, []);
 
+    useEffect(() => {
+        const fetchData = async () => {
+            const accessToken = localStorage.getItem('accessToken'); // Retrieve the access token from localStorage
+            fetch('http://localhost:8080/api/centers', {
+                method: 'GET', // Explicitly stating the HTTP method
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${accessToken}`,
+                },
+            })
+                .then(response => response.json())
+                .then(data => setCenter(data))
+                .catch(error => {
+                    console.error('Error fetching centers:', error);
+                }
+                );
+        }
+        fetchData();
+    }, []);
     const handleAddFresher = () => {
         navigate('/add-fresher');
     };
@@ -69,8 +91,10 @@ const FresherManagement = () => {
     // Filter freshers by name
     const filteredFreshers = freshers.filter((fresher) => {
         const nameMatch = fresher.name.toLowerCase().includes(searchTerm.toLowerCase());
+        const emailMatch = fresher.email.toLowerCase().includes(searchEmail.toLowerCase());
         const languageMatch = !filteredLanguage || fresher.language === filteredLanguage;
-        return nameMatch && languageMatch;
+        const centerMatch = !filteredCenter || fresher?.center?.name === filteredCenter;
+        return nameMatch && emailMatch && languageMatch && centerMatch;
     });
 
     return (
@@ -82,6 +106,12 @@ const FresherManagement = () => {
                     placeholder="Search by name"
                     className="border border-gray-300 p-2 rounded-lg mr-2"
                     onChange={(event) => setSearchTerm(event.target.value)}
+                />
+                <input
+                    type="text"
+                    placeholder="Search by email"
+                    className="border border-gray-300 p-2 rounded-lg mr-2"
+                    onChange={(event) => setSearchEmail(event.target.value)}
                 />
                 <select
                     className="border border-gray-300 p-2 rounded-lg mr-2"
@@ -102,6 +132,19 @@ const FresherManagement = () => {
                     <option value="Swift">Swift</option>
                     <option value="Kotlin">Kotlin</option>
                     <option value="Rust">Rust</option>
+                </select>
+                <select
+                    className="border border-gray-300 p-2 rounded-lg mr-2"
+                    value={filteredCenter}
+                    onChange={(event) => setFilteredCenter(event.target.value)}
+                >
+                    <option value="">All Centers</option>
+                    {/* Add options for each center */}
+                    {center?.map((center) => (
+                        <option key={center?.id} value={center?.name}>
+                            {center?.name}
+                        </option>
+                    ))}
                 </select>
                 <button
                     className="bg-blue-500 text-white p-2 rounded-md"

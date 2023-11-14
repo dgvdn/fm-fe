@@ -8,6 +8,7 @@ import AddFresher from './components/AddFresher';
 import UpdateFresher from './components/UpdateFresher';
 import CenterManagement from './components/CenterManagement';
 import AddCenter from './components/AddCenter';
+import UpdateCenter from './components/UpdateCenter';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/fresher-management/update/:id" element={<UpdateFresher />} />
           <Route path='/center-management' element={<CenterManagement />} />
           <Route path='/add-center' element={<AddCenter />} />
+          <Route path='/update-center/:id' element={<UpdateCenter />} />
         </Routes>
       </div>
     </div>

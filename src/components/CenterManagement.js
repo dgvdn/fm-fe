@@ -29,9 +29,37 @@ const CenterManagement = () => {
         }
         fetchData();
     }, []);
+
     const handleAddCenter = () => {
         navigate('/add-center');
     };
+
+    const handleDeleteCenter = async (centerId) => { 
+        try {
+            const accessToken = localStorage.getItem('accessToken'); // Retrieve the access token from localStorage
+            const response = await fetch(`http://localhost:8080/api/centers/${centerId}`, {
+                method: 'DELETE', // Explicitly stating the HTTP method
+                headers: {
+                    'Authorization': `Bearer ${accessToken}`,
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            // Remove the deleted center from the list of centers
+            const updatedCenters = centers.filter(center => center.id !== centerId);
+            setCenters(updatedCenters);
+        } catch (error) {
+            console.error('There has been a problem with your fetch operation:', error);
+        }
+    }
+
+    const handleUpdateCenter = (centerId) => {
+        navigate(`/update-center/${centerId}`);
+    }
+
     return (
         <div className="p-4">
             <h1 className="text-2xl font-bold mb-4">Center Management</h1>
@@ -62,13 +90,13 @@ const CenterManagement = () => {
                                 <td className="border px-4 py-2 flex space-x-2">
                                     <button
                                         className="bg-yellow-500 text-white p-2 rounded-md"
-
+                                        onClick={() => handleUpdateCenter(center.id)}
                                     >
                                         Update
                                     </button>
                                     <button
                                         className="bg-red-500 text-white p-2 rounded-md"
-
+                                        onClick={() => handleDeleteCenter(center.id)}
                                     >
                                         Delete
                                     </button>
