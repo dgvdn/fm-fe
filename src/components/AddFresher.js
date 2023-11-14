@@ -1,7 +1,22 @@
 import React, { useState, useEffect } from 'react';
 
 function AddFresher() {
-    // State to store fresher details
+
+    const programmingLanguages = [
+        'JavaScript',
+        'Python',
+        'Java',
+        'C#',
+        'C++',
+        'TypeScript',
+        'Ruby',
+        'Swift',
+        'Kotlin',
+        'Go',
+        'Rust',
+        // Add more languages as needed
+    ];
+
     const [fresherData, setFresherData] = useState({
         name: '',
         center: null,
@@ -131,16 +146,22 @@ function AddFresher() {
                 </div>
                 <div className="mb-4">
                     <label htmlFor="language" className="block text-gray-600 font-medium">
-                        Language
+                        Programming Language
                     </label>
-                    <input
-                        type="text"
+                    <select
                         id="language"
                         name="language"
                         className="w-full p-2 border rounded-md"
                         value={fresherData.language}
                         onChange={handleInputChange}
-                    />
+                    >
+                        <option value="">Select a language</option>
+                        {programmingLanguages.map((language) => (
+                            <option key={language} value={language}>
+                                {language}
+                            </option>
+                        ))}
+                    </select>
                 </div>
                 <div className="mb-4">
                     <label htmlFor="address" className="block text-gray-600 font-medium">

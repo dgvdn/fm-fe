@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 const FresherManagement = () => {
     const [freshers, setFreshers] = useState([]);
     const [searchTerm, setSearchTerm] = useState(''); // Search term state
+    const [filteredLanguage, setFilteredLanguage] = useState(''); // Filtered language state
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -67,7 +68,9 @@ const FresherManagement = () => {
 
     // Filter freshers by name
     const filteredFreshers = freshers.filter((fresher) => {
-        return fresher.name.toLowerCase().includes(searchTerm.toLowerCase());
+        const nameMatch = fresher.name.toLowerCase().includes(searchTerm.toLowerCase());
+        const languageMatch = !filteredLanguage || fresher.language === filteredLanguage;
+        return nameMatch && languageMatch;
     });
 
     return (
@@ -80,6 +83,26 @@ const FresherManagement = () => {
                     className="border border-gray-300 p-2 rounded-lg mr-2"
                     onChange={(event) => setSearchTerm(event.target.value)}
                 />
+                <select
+                    className="border border-gray-300 p-2 rounded-lg mr-2"
+                    value={filteredLanguage}
+                    onChange={(event) => setFilteredLanguage(event.target.value)}
+                >
+                    <option value="">All Languages</option>
+                    {/* Add options for each programming language */}
+                    <option value="JavaScript">JavaScript</option>
+                    <option value="Python">Python</option>
+                    <option value="Java">Java</option>
+                    <option value="C#">C#</option>
+                    <option value="C++">C++</option>
+                    <option value="PHP">PHP</option>
+                    <option value="Ruby">Ruby</option>
+                    <option value="Go">Go</option>
+                    <option value="TypeScript">TypeScript</option>
+                    <option value="Swift">Swift</option>
+                    <option value="Kotlin">Kotlin</option>
+                    <option value="Rust">Rust</option>
+                </select>
                 <button
                     className="bg-blue-500 text-white p-2 rounded-md"
                     onClick={handleAddFresher}
