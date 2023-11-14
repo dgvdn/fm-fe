@@ -33,6 +33,16 @@ const SidebarNav = () => {
               <span className="ml-4">Center Management</span>
             </Link>
           </li>
+          <li>
+            <Link to={`/mark-calculation`} className="flex items-center p-4 hover:bg-gray-700 focus:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
+              <span className="ml-4">Mark Calculation</span>
+            </Link>
+          </li>
+          <li>
+            <Link to={`/statistics`} className="flex items-center p-4 hover:bg-gray-700 focus:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
+              <span className="ml-4">Statistics</span>
+            </Link>
+          </li>
         </ul>
       </div>
       <div className="mb-4 mx-4">

@@ -9,6 +9,10 @@ import UpdateFresher from './components/UpdateFresher';
 import CenterManagement from './components/CenterManagement';
 import AddCenter from './components/AddCenter';
 import UpdateCenter from './components/UpdateCenter';
+import MarkCalculation from './components/MarkCalculation';
+import StatisticsPage from './components/StatisticsPage';
+import MarkStatisticPage from './components/MarkStatisticPage';
+import CenterStatisticPage from './components/CenterStatisticPage';
 
 function App() {
   return (
@@ -24,6 +28,10 @@ function App() {
           <Route path='/center-management' element={<CenterManagement />} />
           <Route path='/add-center' element={<AddCenter />} />
           <Route path='/update-center/:id' element={<UpdateCenter />} />
+          <Route path='/mark-calculation' element={<MarkCalculation />} />
+          <Route path='/statistics' element={<StatisticsPage />} />
+          <Route path='/mark-statistic' element={<MarkStatisticPage />} />
+          <Route path='/center-statistic' element={<CenterStatisticPage />} />
         </Routes>
       </div>
     </div>
