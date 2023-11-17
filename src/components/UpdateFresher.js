@@ -7,6 +7,22 @@ const UpdateFresher = () => {
     const { id } = useParams();
     const navigate = useNavigate();
 
+    const programmingLanguages = [
+        'JavaScript',
+        'Python',
+        'Java',
+        'C#',
+        'C++',
+        'TypeScript',
+        'Ruby',
+        'Swift',
+        'Kotlin',
+        'Go',
+        'Rust',
+        // Add more languages as needed
+    ];
+
+
     const [fresher, setFresher] = useState({
         name: '',
         center: '',
@@ -128,20 +144,20 @@ const UpdateFresher = () => {
                     />
                 </div>
                 <div className="mb-4">
-                    <label htmlFor="center" className="block text-gray-600 font-medium">
-                        Center Name
+                    <label htmlFor="language" className="block text-gray-600 font-medium">
+                        Programming Language
                     </label>
                     <select
-                        id="center"
-                        name="center"
+                        id="language"
+                        name="language"
                         className="w-full p-2 border rounded-md"
-                        value={fresher.center || ''}
+                        value={fresherData.language}
                         onChange={handleInputChange}
                     >
-                        <option value="">No Center</option>
-                        {centers.map((center) => (
-                            <option key={center?.id} value={center?.id}>
-                                {center?.name}
+                        <option value="">Select a language</option>
+                        {programmingLanguages.map((language) => (
+                            <option key={language} value={language}>
+                                {language}
                             </option>
                         ))}
                     </select>
