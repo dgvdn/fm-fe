@@ -21,7 +21,7 @@ const UpdateFresher = () => {
         'Rust',
         // Add more languages as needed
     ];
-
+    
 
     const [fresher, setFresher] = useState({
         name: '',
@@ -144,6 +144,25 @@ const UpdateFresher = () => {
                     />
                 </div>
                 <div className="mb-4">
+                    <label htmlFor="center" className="block text-gray-600 font-medium">
+                        Center Name
+                    </label>
+                    <select
+                        id="center"
+                        name="center"
+                        className="w-full p-2 border rounded-md"
+                        value={fresher.center?.id || ''}
+                        onChange={handleInputChange}
+                    >
+                        <option value="">No Center</option>
+                        {centers.map((center) => (
+                            <option key={center?.id} value={center?.id}>
+                                {center?.name}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+                <div className="mb-4">
                     <label htmlFor="language" className="block text-gray-600 font-medium">
                         Programming Language
                     </label>
@@ -151,7 +170,7 @@ const UpdateFresher = () => {
                         id="language"
                         name="language"
                         className="w-full p-2 border rounded-md"
-                        value={fresherData.language}
+                        value={fresher.language}
                         onChange={handleInputChange}
                     >
                         <option value="">Select a language</option>
@@ -161,19 +180,6 @@ const UpdateFresher = () => {
                             </option>
                         ))}
                     </select>
-                </div>
-                <div className="mb-4">
-                    <label htmlFor="language" className="block text-gray-600 font-medium">
-                        Language
-                    </label>
-                    <input
-                        type="text"
-                        id="language"
-                        name="language"
-                        className="w-full p-2 border rounded-md"
-                        value={fresher.language}
-                        onChange={handleInputChange}
-                    />
                 </div>
                 <div className="mb-4">
                     <label htmlFor="address" className="block text-gray-600 font-medium">
