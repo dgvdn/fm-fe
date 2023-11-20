@@ -34,8 +34,8 @@ const SidebarNav = () => {
             </Link>
           </li>
           <li>
-            <Link to={`/mark-calculation`} className="flex items-center p-4 hover:bg-gray-700 focus:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
-              <span className="ml-4">Mark Calculation</span>
+            <Link to={`/mark-management`} className="flex items-center p-4 hover:bg-gray-700 focus:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
+              <span className="ml-4">Mark Management</span>
             </Link>
           </li>
           <li>
