@@ -13,6 +13,8 @@ import MarkCalculation from './components/MarkCalculation';
 import StatisticsPage from './components/StatisticsPage';
 import MarkStatisticPage from './components/MarkStatisticPage';
 import CenterStatisticPage from './components/CenterStatisticPage';
+import MarkManagement from './components/MarkManagement';
+import MarkDetails from './components/MarkDetails';
 
 function App() {
   return (
@@ -28,6 +30,8 @@ function App() {
           <Route path='/center-management' element={<CenterManagement />} />
           <Route path='/add-center' element={<AddCenter />} />
           <Route path='/update-center/:id' element={<UpdateCenter />} />
+          <Route path='/mark-management' element={<MarkManagement />} />
+          <Route path='/mark-management/:id' element={<MarkDetails />} />
           <Route path='/mark-calculation' element={<MarkCalculation />} />
           <Route path='/statistics' element={<StatisticsPage />} />
           <Route path='/mark-statistic' element={<MarkStatisticPage />} />
