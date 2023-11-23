@@ -22,6 +22,7 @@ const UpdateFresher = () => {
         // Add more languages as needed
     ];
     
+    const statusOptions = ['ACTIVE', 'INACTIVE', 'GRADUATED'];
 
     const [fresher, setFresher] = useState({
         name: '',
@@ -30,6 +31,7 @@ const UpdateFresher = () => {
         address: '',
         email: '',
         phone: '',
+        status: '',
     });
 
     useEffect(() => {
@@ -93,7 +95,8 @@ const UpdateFresher = () => {
             language: fresher.language,
             address: fresher.address,
             email: fresher.email,
-            phone: fresher.phone
+            phone: fresher.phone,
+            status: fresher.status, // Include the status field in the payload
         };
 
         // Conditionally add the center field only if a center is selected
@@ -219,6 +222,25 @@ const UpdateFresher = () => {
                         value={fresher.phone}
                         onChange={handleInputChange}
                     />
+                </div>
+                <div className="mb-4">
+                    <label htmlFor="status" className="block text-gray-600 font-medium">
+                        Status
+                    </label>
+                    <select
+                        id="status"
+                        name="status"
+                        className="w-full p-2 border rounded-md"
+                        value={fresher.status}
+                        onChange={handleInputChange}
+                    >
+                        <option value="">Select a status</option>
+                        {statusOptions.map((status) => (
+                            <option key={status} value={status}>
+                                {status}
+                            </option>
+                        ))}
+                    </select>
                 </div>
                 <button
                     type="button"
