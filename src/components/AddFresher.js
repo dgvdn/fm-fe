@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function AddFresher() {
 
@@ -26,7 +27,7 @@ function AddFresher() {
         phone: '',
     });
 
-    // State to store the list of centers
+    const navigate = useNavigate();
     const [centers, setCenters] = useState([]);
 
     // Fetch centers from the API when the component mounts
@@ -104,6 +105,7 @@ function AddFresher() {
                 // Handle errors - show an error message to the user
                 console.error('Error:', error);
             });
+            navigate('/fresher-management');
     };
 
 

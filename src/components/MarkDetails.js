@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const MarkDetails = () => {
     const { id } = useParams();
@@ -13,6 +14,7 @@ const MarkDetails = () => {
     const [comment, setComment] = useState('');
     const [markAvg, setMarkAvg] = useState('');
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
 
     // Fetch data
     useEffect(() => {
@@ -51,7 +53,7 @@ const MarkDetails = () => {
     // Calculate average mark
     useEffect(() => {
         // Check if any mark is equal to -1
-        if (![mark1, mark2, mark3].some((mark) => mark === -1)) {
+        if ((mark1 !== -1) && (mark2 !== -1) && (mark3 !== -1) && (mark1 !== '') && (mark2 !== '') && (mark3 !== '')) {
             // Calculate average only if no mark is equal to -1
             const marks = [parseFloat(mark1), parseFloat(mark2), parseFloat(mark3)].filter((mark) => !isNaN(mark));
             const total = marks.reduce((sum, mark) => sum + mark, 0);
@@ -68,7 +70,13 @@ const MarkDetails = () => {
         try {
             const accessToken = localStorage.getItem('accessToken')
             setLoading(true);
-
+            var avg_mark = averageMark;
+            if (avg_mark === '') {
+                avg_mark = -1;
+            }
+            else {
+                avg_mark = parseFloat(avg_mark);
+            }
             // Perform your update logic here, such as sending data to the server
             const response = await fetch('http://localhost:8080/api/marks/add', {
                 method: 'POST',
@@ -83,7 +91,7 @@ const MarkDetails = () => {
                     mark_1: parseFloat(mark1),
                     mark_2: parseFloat(mark2),
                     mark_3: parseFloat(mark3),
-                    mark_avg: parseFloat(averageMark),
+                    mark_avg: avg_mark,
                     comment: comment,
                     // Add any other fields you need to send
                 }),
@@ -100,6 +108,7 @@ const MarkDetails = () => {
         } finally {
             // Reset loading state when the update operation is complete
             setLoading(false);
+            navigate('/mark-management');
         }
     };
 
@@ -131,7 +140,7 @@ const MarkDetails = () => {
                     type="number"
                     value={mark1 !== -1 ? mark1 : ''}
                     onChange={(e) => {
-                        setMark1(e.target.value);
+                        setMark1(e.target.value === '' ? -1 : e.target.value);
                     }}
                 />
             </div>
@@ -144,7 +153,7 @@ const MarkDetails = () => {
                     type="number"
                     value={mark2 !== -1 ? mark2 : ''}
                     onChange={(e) => {
-                        setMark2(e.target.value);
+                        setMark2(e.target.value === -1 ? -1 : e.target.value);
                     }}
                 />
             </div>
@@ -157,7 +166,7 @@ const MarkDetails = () => {
                     type="number"
                     value={mark3 !== -1 ? mark3 : ''}
                     onChange={(e) => {
-                        setMark3(e.target.value);
+                        setMark3(e.target.value === '' ? -1 : e.target.value);
                     }}
                 />
             </div>

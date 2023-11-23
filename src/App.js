@@ -15,6 +15,9 @@ import MarkStatisticPage from './components/MarkStatisticPage';
 import CenterStatisticPage from './components/CenterStatisticPage';
 import MarkManagement from './components/MarkManagement';
 import MarkDetails from './components/MarkDetails';
+import StatusStatisticPage from './components/StatusStatisticPage';
+import FresherListByStatus from './components/FresherListByStatus';
+import LanguageStatisticPage from './components/LanguageStatisticPage';
 
 function App() {
   return (
@@ -36,6 +39,9 @@ function App() {
           <Route path='/statistics' element={<StatisticsPage />} />
           <Route path='/mark-statistic' element={<MarkStatisticPage />} />
           <Route path='/center-statistic' element={<CenterStatisticPage />} />
+          <Route path='/status-statistic' element={<StatusStatisticPage />} />
+          <Route path='/fresher-list/:status' element={<FresherListByStatus />} />
+          <Route path='/language-statistic' element={<LanguageStatisticPage />} />
         </Routes>
       </div>
     </div>

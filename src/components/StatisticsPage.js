@@ -16,6 +16,16 @@ const StatisticsPage = () => {
             Center Statistics
           </button>
         </Link>
+        <Link to="/status-statistic">
+          <button className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-md transition duration-300">
+            Status Statistics
+          </button>
+        </Link>
+        <Link to="/language-statistic">
+          <button className="bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded-md transition duration-300">
+            Language Statistics
+          </button>
+        </Link>
       </div>
     </div>
   );
